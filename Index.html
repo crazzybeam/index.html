@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recrutamento | Crazzy Beamers</title>
+    <style>
+        :root {
+            --primary: #a600ff;
+            --primary-dark: #7a00bd;
+            --bg-overlay: rgba(10, 0, 20, 0.85);
+            --input-bg: rgba(0, 0, 0, 0.6);
+            --border: #3d0066;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-image: url('https://r2.erweima.ai/ai_image/9589d892-959c-4860-9bc8-e215f795744a.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            padding: 50px 20px;
+            color: white;
+        }
+
+        .container {
+            background: var(--bg-overlay);
+            backdrop-filter: blur(10px);
+            max-width: 850px;
+            width: 100%;
+            padding: 40px;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            box-shadow: 0 0 40px rgba(0,0,0,0.8);
+        }
+
+        header {
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 32px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin: 0;
+            color: #fff;
+            text-shadow: 2px 2px 10px var(--primary);
+        }
+
+        .section-title {
+            font-size: 13px;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin: 25px 0 15px;
+            letter-spacing: 2px;
+            font-weight: bold;
+            border-left: 3px solid var(--primary);
+            padding-left: 10px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group { margin-bottom: 20px; }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 13px;
+            color: #ccc;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            background: var(--input-bg);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: white;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(166, 0, 255, 0.3);
+        }
+
+        textarea { min-height: 80px; resize: vertical; }
+
+        .btn-submit {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(90deg, var(--primary-dark), var(--primary));
+            border: none;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: 0.3s;
+        }
+
+        .btn-submit:hover {
+            transform: scale(1.01);
+            box-shadow: 0 0 20px var(--primary);
+        }
+
+        /* TELA DE SUCESSO */
+        #success-screen {
+            display: none;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .notice-box {
+            border: 2px dashed var(--primary);
+            padding: 30px;
+            background: rgba(166, 0, 255, 0.1);
+            margin-top: 20px;
+        }
+
+        .notice-text {
+            font-size: 20px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<div class="container" id="main-container">
+    <div id="form-content">
+        <header>
+            <h1>CRAZZY BEAMERS</h1>
+        </header>
+
+        <form id="staffForm">
+            <div class="section-title">Dados Civis e Identificação</div>
+            <div class="grid">
+                <div class="form-group">
+                    <label>Nome Completo (Vida Real)</label>
+                    <input type="text" id="nome" required>
+                </div>
+                <div class="form-group">
+                    <label>Data de Nascimento</label>
+                    <input type="date" id="nascimento" required>
+                </div>
+                <div class="form-group">
+                    <label>Discord (User#0000)</label>
+                    <input type="text" id="discord" required>
+                </div>
+                <div class="form-group">
+                    <label>Idade Atual</label>
+                    <input type="number" id="idade" required>
+                </div>
+            </div>
+
+            <div class="section-title">Qualificações e Experiência</div>
+            <div class="form-group">
+                <label>Liste os grupos, jogos ou comunidades onde já atuou como Staff:</label>
+                <textarea id="experiencia" placeholder="Ex: Admin no Grupo X, Mod no Jogo Y..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>Quais ferramentas de administração você domina? (Admins, Logs, Comandos)</label>
+                <input type="text" id="ferramentas" required>
+            </div>
+
+            <div class="section-title">Comprometimento</div>
+            <div class="grid">
+                <div class="form-group">
+                    <label>Horas Diárias Disponíveis</label>
+                    <input type="text" id="horas" placeholder="Ex: 4 a 6 horas" required>
+                </div>
+                <div class="form-group">
+                    <label>Período de Atividade</label>
+                    <select id="periodo">
+                        <option value="Manhã">Manhã</option>
+                        <option value="Tarde">Tarde</option>
+                        <option value="Noite">Noite</option>
+                        <option value="Madrugada">Madrugada</option>
+                        <option value="Misto">Misto / Variado</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="section-title">Avaliação Psicológica</div>
+            <div class="form-group">
+                <label>Por que deveríamos escolher você e não outro candidato?</label>
+                <textarea id="motivo" required></textarea>
+            </div>
+            <div class="form-group">
+                <label>Se um amigo Staff violar as regras, qual seria sua atitude imediata?</label>
+                <textarea id="etica" required></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit" id="submitBtn">Finalizar Inscrição Profissional</button>
+        </form>
+    </div>
+
+    <div id="success-screen">
+        <div style="font-size: 60px; margin-bottom: 20px;">💜</div>
+        <h2>Candidatura Registrada!</h2>
+        <div class="notice-box">
+            <p class="notice-text">
+                🌟 Aviso Em Dentro De 24 Horas Você Vai Saber Se Você Foi Aprovado Ou Reprovado🌟
+            </p>
+        </div>
+        <p style="margin-top: 30px; color: #888;">Nossa equipe técnica já recebeu seus dados para auditoria.</p>
+    </div>
+</div>
+
+<script>
+    document.getElementById('staffForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const btn = document.getElementById('submitBtn');
+        const formDiv = document.getElementById('form-content');
+        const successDiv = document.getElementById('success-screen');
+        
+        const webhook = "https://discord.com/api/webhooks/1464100991199613003/tm8jZwjiEZ7S6oCd8F8XgapS9NUWzQCap7cP56DsHjlJ9tIxkQfKL4iPii_bTqw8XSbP";
+
+        const payload = {
+            username: "Crazzy Beamers Auditor",
+            embeds: [{
+                title: "💎 NOVA CANDIDATURA STAFF DETECTADA",
+                color: 0xa600ff,
+                fields: [
+                    { name: "👤 Nome Real", value: document.getElementById('nome').value, inline: true },
+                    { name: "🎂 Idade", value: document.getElementById('idade').value, inline: true },
+                    { name: "🎮 Discord", value: document.getElementById('discord').value, inline: true },
+                    { name: "📅 Nasc.", value: document.getElementById('nascimento').value, inline: true },
+                    { name: "⏰ Horas", value: document.getElementById('horas').value, inline: true },
+                    { name: "☀️ Período", value: document.getElementById('periodo').value, inline: true },
+                    { name: "🛠️ Ferramentas", value: document.getElementById('ferramentas').value },
+                    { name: "📜 Exp. Anterior", value: document.getElementById('experiencia').value || "Nenhuma" },
+                    { name: "🎯 Motivo", value: document.getElementById('motivo').value },
+                    { name: "⚖️ Resposta Ética", value: document.getElementById('etica').value }
+                ],
+                footer: { text: "Crazzy Beamers Security System" },
+                timestamp: new Date()
+            }]
+        };
+
+        btn.disabled = true;
+        btn.innerText = "ENVIANDO DADOS...";
+
+        try {
+            await fetch(webhook, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            formDiv.style.display = 'none';
+            successDiv.style.display = 'block';
+        } catch (err) {
+            alert("Erro ao conectar com o banco de dados. Tente novamente.");
+            btn.disabled = false;
+            btn.innerText = "Finalizar Inscrição Profissional";
+        }
+    });
+</script>
+
+</body>
+  </html>
