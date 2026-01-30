@@ -8,13 +8,14 @@
         :root {
             --primary: #a600ff;
             --primary-dark: #7a00bd;
-            --bg-overlay: rgba(10, 0, 20, 0.85);
-            --input-bg: rgba(0, 0, 0, 0.6);
+            --bg-overlay: rgba(10, 0, 20, 0.92);
+            --input-bg: rgba(20, 20, 20, 0.8);
             --border: #3d0066;
+            --glow: 0 0 15px rgba(166, 0, 255, 0.5);
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', -apple-system, sans-serif;
             background-image: url('https://r2.erweima.ai/ai_image/9589d892-959c-4860-9bc8-e215f795744a.jpg');
             background-size: cover;
             background-position: center;
@@ -22,45 +23,48 @@
             margin: 0;
             display: flex;
             justify-content: center;
-            padding: 50px 20px;
+            padding: 40px 15px;
             color: white;
+            min-height: 100vh;
         }
 
         .container {
             background: var(--bg-overlay);
-            backdrop-filter: blur(10px);
-            max-width: 850px;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            max-width: 800px;
             width: 100%;
-            padding: 40px;
-            border-radius: 4px;
+            padding: 35px;
+            border-radius: 8px;
             border: 1px solid var(--border);
-            box-shadow: 0 0 40px rgba(0,0,0,0.8);
+            box-shadow: 0 0 50px rgba(0,0,0,0.9);
         }
 
         header {
             border-bottom: 2px solid var(--primary);
-            padding-bottom: 15px;
-            margin-bottom: 30px;
+            padding-bottom: 20px;
+            margin-bottom: 35px;
+            text-align: center;
         }
 
         h1 {
-            font-size: 32px;
+            font-size: 36px;
             text-transform: uppercase;
-            letter-spacing: 4px;
+            letter-spacing: 6px;
             margin: 0;
             color: #fff;
-            text-shadow: 2px 2px 10px var(--primary);
+            text-shadow: var(--glow);
         }
 
         .section-title {
-            font-size: 13px;
+            font-size: 14px;
             text-transform: uppercase;
             color: var(--primary);
-            margin: 25px 0 15px;
+            margin: 30px 0 15px;
             letter-spacing: 2px;
-            font-weight: bold;
-            border-left: 3px solid var(--primary);
-            padding-left: 10px;
+            font-weight: 800;
+            border-left: 4px solid var(--primary);
+            padding-left: 12px;
         }
 
         .grid {
@@ -69,123 +73,144 @@
             gap: 20px;
         }
 
-        .form-group { margin-bottom: 20px; }
+        .form-group { margin-bottom: 25px; }
 
         label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             font-size: 13px;
-            color: #ccc;
+            color: #b3b3b3;
+            font-weight: 500;
         }
 
         input, textarea, select {
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             background: var(--input-bg);
             border: 1px solid var(--border);
-            border-radius: 4px;
+            border-radius: 6px;
             color: white;
-            font-size: 14px;
+            font-size: 15px;
+            transition: 0.3s;
             box-sizing: border-box;
         }
 
         input:focus, textarea:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 10px rgba(166, 0, 255, 0.3);
+            box-shadow: var(--glow);
+            background: rgba(30, 30, 30, 0.9);
         }
 
-        textarea { min-height: 80px; resize: vertical; }
+        textarea { min-height: 100px; resize: none; }
 
         .btn-submit {
             width: 100%;
-            padding: 18px;
-            background: linear-gradient(90deg, var(--primary-dark), var(--primary));
+            padding: 20px;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
             border: none;
+            border-radius: 6px;
             color: white;
-            font-weight: bold;
+            font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             cursor: pointer;
-            margin-top: 30px;
-            transition: 0.3s;
+            margin-top: 20px;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
         }
 
-        .btn-submit:hover {
-            transform: scale(1.01);
-            box-shadow: 0 0 20px var(--primary);
+        .btn-submit:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px var(--primary);
+            filter: brightness(1.1);
+        }
+
+        .btn-submit:disabled {
+            background: #444;
+            cursor: not-allowed;
+            opacity: 0.7;
         }
 
         /* TELA DE SUCESSO */
         #success-screen {
             display: none;
             text-align: center;
-            padding: 60px 20px;
+            padding: 50px 0;
+            animation: fadeIn 0.8s ease;
         }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         .notice-box {
             border: 2px dashed var(--primary);
             padding: 30px;
-            background: rgba(166, 0, 255, 0.1);
-            margin-top: 20px;
+            background: rgba(166, 0, 255, 0.08);
+            margin: 30px 0;
+            border-radius: 8px;
         }
 
         .notice-text {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: bold;
             color: #fff;
+            text-shadow: 0 0 10px var(--primary);
         }
 
-        @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+        @media (max-width: 650px) { 
+            .grid { grid-template-columns: 1fr; }
+            .container { padding: 20px; }
+            h1 { font-size: 28px; }
+        }
     </style>
 </head>
 <body>
 
-<div class="container" id="main-container">
+<div class="container">
     <div id="form-content">
         <header>
             <h1>CRAZZY BEAMERS</h1>
         </header>
 
         <form id="staffForm">
-            <div class="section-title">Dados Civis e Identificação</div>
+            <div class="section-title">Identificação</div>
             <div class="grid">
                 <div class="form-group">
-                    <label>Nome Completo (Vida Real)</label>
-                    <input type="text" id="nome" required>
+                    <label>Nome Completo</label>
+                    <input type="text" id="nome" required placeholder="Seu nome">
+                </div>
+                <div class="form-group">
+                    <label>Discord (User)</label>
+                    <input type="text" id="discord" required placeholder="exemplo#0000">
                 </div>
                 <div class="form-group">
                     <label>Data de Nascimento</label>
                     <input type="date" id="nascimento" required>
                 </div>
                 <div class="form-group">
-                    <label>Discord (User#0000)</label>
-                    <input type="text" id="discord" required>
-                </div>
-                <div class="form-group">
                     <label>Idade Atual</label>
-                    <input type="number" id="idade" required>
+                    <input type="number" id="idade" required min="10" max="99">
                 </div>
             </div>
 
-            <div class="section-title">Qualificações e Experiência</div>
+            <div class="section-title">Experiência</div>
             <div class="form-group">
-                <label>Liste os grupos, jogos ou comunidades onde já atuou como Staff:</label>
-                <textarea id="experiencia" placeholder="Ex: Admin no Grupo X, Mod no Jogo Y..."></textarea>
+                <label>Onde você já atuou como Staff?</label>
+                <textarea id="experiencia" placeholder="Liste grupos ou jogos..."></textarea>
             </div>
             <div class="form-group">
-                <label>Quais ferramentas de administração você domina? (Admins, Logs, Comandos)</label>
-                <input type="text" id="ferramentas" required>
+                <label>Ferramentas que domina (Logs, Admins, etc)</label>
+                <input type="text" id="ferramentas" required placeholder="Ex: F3X, Adonis, Logs">
             </div>
 
-            <div class="section-title">Comprometimento</div>
+            <div class="section-title">Disponibilidade</div>
             <div class="grid">
                 <div class="form-group">
-                    <label>Horas Diárias Disponíveis</label>
-                    <input type="text" id="horas" placeholder="Ex: 4 a 6 horas" required>
+                    <label>Horas Diárias</label>
+                    <input type="text" id="horas" placeholder="Ex: 5 horas" required>
                 </div>
                 <div class="form-group">
-                    <label>Período de Atividade</label>
+                    <label>Período Principal</label>
                     <select id="periodo">
                         <option value="Manhã">Manhã</option>
                         <option value="Tarde">Tarde</option>
@@ -196,81 +221,88 @@
                 </div>
             </div>
 
-            <div class="section-title">Avaliação Psicológica</div>
+            <div class="section-title">Psicológico</div>
             <div class="form-group">
-                <label>Por que deveríamos escolher você e não outro candidato?</label>
-                <textarea id="motivo" required></textarea>
+                <label>Por que escolher você?</label>
+                <textarea id="motivo" required placeholder="Destaque suas qualidades..."></textarea>
             </div>
             <div class="form-group">
-                <label>Se um amigo Staff violar as regras, qual seria sua atitude imediata?</label>
-                <textarea id="etica" required></textarea>
+                <label>Se um amigo Staff violar as regras, o que você faz?</label>
+                <textarea id="etica" required placeholder="Sua conduta ética..."></textarea>
             </div>
 
-            <button type="submit" class="btn-submit" id="submitBtn">Finalizar Inscrição Profissional</button>
+            <button type="submit" class="btn-submit" id="submitBtn">Enviar Candidatura Profissional</button>
         </form>
     </div>
 
     <div id="success-screen">
-        <div style="font-size: 60px; margin-bottom: 20px;">💜</div>
+        <div style="font-size: 70px; margin-bottom: 20px;">⚡</div>
         <h2>Candidatura Registrada!</h2>
         <div class="notice-box">
             <p class="notice-text">
-                🌟 Aviso Em Dentro De 24 Horas Você Vai Saber Se Você Foi Aprovado Ou Reprovado🌟
+                🌟 EM ATÉ 24 HORAS VOCÊ RECEBERÁ O RESULTADO 🌟
             </p>
         </div>
-        <p style="margin-top: 30px; color: #888;">Nossa equipe técnica já recebeu seus dados para auditoria.</p>
+        <p style="color: #aaa;">Obrigado por escolher a Crazzy Beamers. Seus dados foram criptografados e enviados.</p>
     </div>
 </div>
 
 <script>
     document.getElementById('staffForm').addEventListener('submit', async function(e) {
         e.preventDefault();
+        
         const btn = document.getElementById('submitBtn');
         const formDiv = document.getElementById('form-content');
         const successDiv = document.getElementById('success-screen');
         
+        // Link do Webhook - Lembre-se de não apagar este webhook no Discord
         const webhook = "https://discord.com/api/webhooks/1464100991199613003/tm8jZwjiEZ7S6oCd8F8XgapS9NUWzQCap7cP56DsHjlJ9tIxkQfKL4iPii_bTqw8XSbP";
 
         const payload = {
-            username: "Crazzy Beamers Auditor",
+            username: "Auditoria Crazzy Beamers",
+            avatar_url: "https://r2.erweima.ai/ai_image/9589d892-959c-4860-9bc8-e215f795744a.jpg",
             embeds: [{
-                title: "💎 NOVA CANDIDATURA STAFF DETECTADA",
-                color: 0xa600ff,
+                title: "💠 NOVA INSCRIÇÃO PARA STAFF",
+                color: 10878975, // Cor roxa
+                timestamp: new Date().toISOString(),
                 fields: [
-                    { name: "👤 Nome Real", value: document.getElementById('nome').value, inline: true },
-                    { name: "🎂 Idade", value: document.getElementById('idade').value, inline: true },
+                    { name: "👤 Candidato", value: `**${document.getElementById('nome').value}**`, inline: true },
                     { name: "🎮 Discord", value: document.getElementById('discord').value, inline: true },
-                    { name: "📅 Nasc.", value: document.getElementById('nascimento').value, inline: true },
-                    { name: "⏰ Horas", value: document.getElementById('horas').value, inline: true },
-                    { name: "☀️ Período", value: document.getElementById('periodo').value, inline: true },
-                    { name: "🛠️ Ferramentas", value: document.getElementById('ferramentas').value },
-                    { name: "📜 Exp. Anterior", value: document.getElementById('experiencia').value || "Nenhuma" },
-                    { name: "🎯 Motivo", value: document.getElementById('motivo').value },
-                    { name: "⚖️ Resposta Ética", value: document.getElementById('etica').value }
+                    { name: "🎂 Idade/Nasc", value: `${document.getElementById('idade').value} anos (${document.getElementById('nascimento').value})`, inline: true },
+                    { name: "⏰ Disponibilidade", value: `${document.getElementById('horas').value} (${document.getElementById('periodo').value})`, inline: true },
+                    { name: "🛠️ Ferramentas", value: document.getElementById('ferramentas').value, inline: true },
+                    { name: "📜 Experiência", value: document.getElementById('experiencia').value || "Não informada" },
+                    { name: "🎯 Motivação", value: document.getElementById('motivo').value },
+                    { name: "⚖️ Ética Profissional", value: document.getElementById('etica').value }
                 ],
-                footer: { text: "Crazzy Beamers Security System" },
-                timestamp: new Date()
+                footer: { text: "ID de Auditoria Interna | Crazzy Beamers" }
             }]
         };
 
         btn.disabled = true;
-        btn.innerText = "ENVIANDO DADOS...";
+        btn.innerHTML = '<span style="animation: pulse 1s infinite">ENVIANDO PARA O BANCO...</span>';
 
         try {
-            await fetch(webhook, {
+            const response = await fetch(webhook, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             });
-            formDiv.style.display = 'none';
-            successDiv.style.display = 'block';
+
+            if (response.ok) {
+                formDiv.style.display = 'none';
+                successDiv.style.display = 'block';
+                window.scrollTo(0, 0);
+            } else {
+                throw new Error();
+            }
         } catch (err) {
-            alert("Erro ao conectar com o banco de dados. Tente novamente.");
+            alert("⚠️ ALERTA: Ocorreu um erro na conexão com o servidor. Verifique sua internet ou tente novamente mais tarde.");
             btn.disabled = false;
-            btn.innerText = "Finalizar Inscrição Profissional";
+            btn.innerText = "Enviar Candidatura Profissional";
         }
     });
 </script>
 
 </body>
-  </html>
+</html>
